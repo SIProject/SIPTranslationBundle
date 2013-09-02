@@ -6,7 +6,7 @@
         "sonata-project/admin-bundle": "2.2.x-dev"
     },
     "autoload": {
-        "psr-0": { "SIP\\Translation": "" }
+        "psr-0": { "SIP\\TranslationBundle": "" }
     },
-    "target-dir": "SIP/Translation"
+    "target-dir": "SIP/TranslationBundle"
 }
