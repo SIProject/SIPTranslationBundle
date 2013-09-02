@@ -1,0 +1,18 @@
+parameters:
+    armd.translation.listener.class: Armd\TranslationBundle\EventListener\TranslationListener
+
+services:
+    armd.translation.listener:
+        class: %armd.translation.listener.class%
+        tags:
+            - { name: doctrine.event_listener, event: loadClassMetadata }
+            - { name: doctrine.event_listener, event: postGenerateSchema }
+            - { name: doctrine.event_listener, event: postPersist }
+            - { name: doctrine.event_listener, event: postFlush }
+        arguments: [@service_container]
+
+    armd.translation.form.type.translation:
+        class: Armd\TranslationBundle\Form\Type\TranslationType
+        arguments: [@armd.translation.listener, @doctrine.orm.entity_manager]
+        tags:
+            - { name: form.type, alias: translation }
