@@ -1,9 +1,10 @@
 parameters:
-    armd.translation.listener.class: Armd\TranslationBundle\EventListener\TranslationListener
+    sip.translation.listener.class: SIP\TranslationBundle\EventListener\TranslationListener
+    sip.translation.form.type.translation.class: SIP\TranslationBundle\Form\Type\TranslationType
 
 services:
-    armd.translation.listener:
-        class: %armd.translation.listener.class%
+    sip.translation.listener:
+        class: %sip.translation.listener.class%
         tags:
             - { name: doctrine.event_listener, event: loadClassMetadata }
             - { name: doctrine.event_listener, event: postGenerateSchema }
@@ -11,8 +12,8 @@ services:
             - { name: doctrine.event_listener, event: postFlush }
         arguments: [@service_container]
 
-    armd.translation.form.type.translation:
-        class: Armd\TranslationBundle\Form\Type\TranslationType
-        arguments: [@armd.translation.listener, @doctrine.orm.entity_manager]
+    sip.translation.form.type.translation:
+        class: %sip.translation.form.type.translation.class%
+        arguments: [@sip.translation.listener, @doctrine.orm.entity_manager]
         tags:
             - { name: form.type, alias: translation }

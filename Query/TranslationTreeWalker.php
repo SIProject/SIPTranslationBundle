@@ -1,8 +1,8 @@
 <?php
 /*
- * (c) Suhinin Ilja <isuhinin@armd.ru>
+ * (c) Suhinin Ilja <iljasuhinin@gmail.com>
  */
-namespace Armd\TranslationBundle\Query;
+namespace SIP\TranslationBundle\Query;
 
 use Doctrine\ORM\Query\SqlWalker;
 use Doctrine\ORM\Query\AST\SelectStatement;
@@ -11,7 +11,7 @@ use Doctrine\ORM\Query\AST\DeleteStatement;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Query;
 
-use Armd\TranslationBundle\EventListener\TranslationListener;
+use SIP\TranslationBundle\EventListener\TranslationListener;
 
 class TranslationTreeWalker extends SqlWalker
 {
@@ -139,7 +139,7 @@ class TranslationTreeWalker extends SqlWalker
      * Get the currently used TranslatableListener
      *
      * @throws \Gedmo\Exception\RuntimeException - if listener is not found
-     * @return \Armd\TranslationBundle\EventListener\TranslationListener
+     * @return \SIP\TranslationBundle\EventListener\TranslationListener
      */
     private function getTranslationListener(\Doctrine\ORM\Query $query)
     {

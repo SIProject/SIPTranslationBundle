@@ -1,8 +1,8 @@
 <?php
 /*
- * (c) Suhinin Ilja <isuhinin@armd.ru>
+ * (c) Suhinin Ilja <iljasuhinin@gmail.com>
  */
-namespace Armd\TranslationBundle\EventListener;
+namespace SIP\TranslationBundle\EventListener;
 
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Tools\Event\GenerateSchemaEventArgs;
@@ -56,8 +56,8 @@ class TranslationListener
     public function __construct(ContainerInterface $container)
     {
         $this->container     = $container;
-        $this->locales       = $this->container->getParameter('armd.translation.allow_langs');
-        $this->defaultLocale = $this->container->getParameter('armd.translation.dafault_lang');
+        $this->locales       = $this->container->getParameter('sip.translation.allow_langs');
+        $this->defaultLocale = $this->container->getParameter('sip.translation.dafault_lang');
         $this->reader        = $this->container->get('annotation_reader');
     }
 
@@ -67,10 +67,10 @@ class TranslationListener
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
         $classMetadata = $eventArgs->getClassMetadata();
-        if ($this->reader->getClassAnnotation($classMetadata->getReflectionClass(), 'Armd\TranslationBundle\Annotation\Translatable')) {
+        if ($this->reader->getClassAnnotation($classMetadata->getReflectionClass(), 'SIP\TranslationBundle\Annotation\Translatable')) {
             foreach ($classMetadata->fieldMappings as $filed) {
                 $property = $classMetadata->getReflectionClass()->getProperty($filed['fieldName']);
-                if ($this->reader->getPropertyAnnotation($property, 'Armd\TranslationBundle\Annotation\Translated')) {
+                if ($this->reader->getPropertyAnnotation($property, 'SIP\TranslationBundle\Annotation\Translated')) {
                     $this->decoratedTables[$classMetadata->getTableName()][] = $filed;
                 }
             }

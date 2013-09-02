@@ -2,14 +2,14 @@
 /*
  * (c) Suhinin Ilja <iljasuhinin@gmail.com>
  */
-namespace Armd\TranslationBundle\Form\Type;
+namespace SIP\TranslationBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
-use Armd\TranslationBundle\Form\DataTransformer\FieldToTranslationTransformer;
-use Armd\TranslationBundle\EventListener\TranslationListener;
+use SIP\TranslationBundle\Form\DataTransformer\FieldToTranslationTransformer;
+use SIP\TranslationBundle\EventListener\TranslationListener;
 
 use Doctrine\ORM\EntityManager;
 
@@ -21,12 +21,12 @@ class TranslationType extends AbstractType
     protected $em;
 
     /**
-     * @var \Armd\TranslationBundle\EventListener\TranslationListener
+     * @var \SIP\TranslationBundle\EventListener\TranslationListener
      */
     protected $translationListener;
 
     /**
-     * @param \Armd\TranslationBundle\EventListener\TranslationListener $translationListener
+     * @param \SIP\TranslationBundle\EventListener\TranslationListener $translationListener
      * @param \Doctrine\ORM\EntityManager $em
      */
     public function __construct(TranslationListener $translationListener, EntityManager $em)

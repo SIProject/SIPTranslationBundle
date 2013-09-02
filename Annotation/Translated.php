@@ -2,7 +2,7 @@
 /*
  * (c) Suhinin Ilja <iljasuhinin@gmail.com>
  */
-namespace Armd\TranslationBundle\Annotation;
+namespace SIP\TranslationBundle\Annotation;
 
 /**
  * @Annotation

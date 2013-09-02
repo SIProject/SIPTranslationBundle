@@ -1,8 +1,8 @@
 <?php
 /*
- * (c) Suhinin Ilja <isuhinin@armd.ru>
+ * (c) Suhinin Ilja <iljasuhinin@gmail.com>
  */
-namespace Armd\TranslationBundle\DependencyInjection;
+namespace SIP\TranslationBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -16,7 +16,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('armd_translation', 'array');
+        $rootNode = $treeBuilder->root('sip_translation', 'array');
 
         $rootNode
             ->children()

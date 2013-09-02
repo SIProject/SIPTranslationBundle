@@ -2,10 +2,10 @@
 /*
  * (c) Suhinin Ilja <iljasuhinin@gmail.com>
  */
-namespace Armd\TranslationBundle;
+namespace SIP\TranslationBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class ArmdTranslationBundle extends Bundle
+class SIPTranslationBundle extends Bundle
 {
 }

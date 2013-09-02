@@ -2,14 +2,14 @@
 /*
  * (c) Suhinin Ilja <iljasuhinin@gmail.com>
  */
-namespace Armd\TranslationBundle\Form\DataTransformer;
+namespace SIP\TranslationBundle\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
 use Sonata\DoctrineORMAdminBundle\Admin\FieldDescription;
 
-use Armd\TranslationBundle\EventListener\TranslationListener;
+use SIP\TranslationBundle\EventListener\TranslationListener;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\ResultSetMapping;
@@ -27,7 +27,7 @@ class FieldToTranslationTransformer implements DataTransformerInterface
     protected $sonataFieldDescription;
 
     /**
-     * @var \Armd\TranslationBundle\EventListener\TranslationListener
+     * @var \SIP\TranslationBundle\EventListener\TranslationListener
      */
     protected $translationListener;
 

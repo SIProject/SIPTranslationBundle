@@ -2,7 +2,7 @@
 /*
  * (c) Suhinin Ilja <iljasuhinin@gmail.com>
  */
-namespace Armd\TranslationBundle\DependencyInjection;
+namespace SIP\TranslationBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -14,7 +14,7 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class ArmdTranslationExtension extends Extension
+class SIPTranslationExtension extends Extension
 {
     /**
      * {@inheritDoc}
@@ -27,7 +27,7 @@ class ArmdTranslationExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load("services.yml");
 
-        $container->setParameter('armd.translation.dafault_lang', $config['default_lang']);
-        $container->setParameter('armd.translation.allow_langs', $config['allow_langs']);
+        $container->setParameter('sip.translation.dafault_lang', $config['default_lang']);
+        $container->setParameter('sip.translation.allow_langs', $config['allow_langs']);
     }
 }

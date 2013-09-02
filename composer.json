@@ -1,0 +1,12 @@
+{
+    "name": "sip/translation-bundle",
+    "type": "symfony-bundle",
+    "description": "Module allow manage translation content integrate with SonataAdminBundle",
+    "require": {
+        "sonata-project/admin-bundle": "2.2.x-dev"
+    },
+    "autoload": {
+        "psr-0": { "SIP\\Translation": "" }
+    },
+    "target-dir": "SIP/Translation"
+}
