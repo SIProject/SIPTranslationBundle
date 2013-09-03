@@ -67,7 +67,8 @@ class TranslationListener
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
         $classMetadata = $eventArgs->getClassMetadata();
-        if ($this->reader->getClassAnnotation($classMetadata->getReflectionClass(), 'SIP\TranslationBundle\Annotation\Translatable')) {
+        $reflectionClass = $classMetadata->getReflectionClass();
+        if ($reflectionClass && $this->reader->getClassAnnotation($reflectionClass, 'SIP\TranslationBundle\Annotation\Translatable')) {
             foreach ($classMetadata->fieldMappings as $filed) {
                 $property = $classMetadata->getReflectionClass()->getProperty($filed['fieldName']);
                 if ($this->reader->getPropertyAnnotation($property, 'SIP\TranslationBundle\Annotation\Translated')) {
