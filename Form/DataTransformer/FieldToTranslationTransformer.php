@@ -57,7 +57,7 @@ class FieldToTranslationTransformer implements DataTransformerInterface
         }
 
         $subject = $this->sonataFieldDescription->getAdmin()->getSubject();
-        if ($subject->getId()) {
+        if ($subject && $subject->getId()) {
             $classMetaData = $this->em->getClassMetadata(get_class($subject));
 
             $tableName = $classMetaData->getTableName();
@@ -97,13 +97,14 @@ class FieldToTranslationTransformer implements DataTransformerInterface
         $defaultLang = $translationValue[$this->translationListener->getDefaultLocale()];
         unset($translationValue[$this->translationListener->getDefaultLocale()]);
 
-        $subject = $this->sonataFieldDescription->getAdmin()->getSubject();
-        $classMetaData = $this->em->getClassMetadata(get_class($subject));
-        $columnName = $classMetaData->getColumnName($this->sonataFieldDescription->getFieldName());
-        $this->translationListener->addTranslationValue(get_class($subject), $columnName, $translationValue);
+        if ($subject = $this->sonataFieldDescription->getAdmin()->getSubject()) {
+            $classMetaData = $this->em->getClassMetadata(get_class($subject));
+            $columnName = $classMetaData->getColumnName($this->sonataFieldDescription->getFieldName());
+            $this->translationListener->addTranslationValue(get_class($subject), $columnName, $translationValue);
 
-        if ($subject->getId()) {
-            $this->translationListener->setTranslateSubject($subject);
+            if ($subject->getId()) {
+                $this->translationListener->setTranslateSubject($subject);
+            }
         }
 
         return $defaultLang;
