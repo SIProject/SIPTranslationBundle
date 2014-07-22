@@ -3,7 +3,7 @@
     "type": "symfony-bundle",
     "description": "Module allow manage translation content integrate with SonataAdminBundle",
     "require": {
-        "sonata-project/admin-bundle": "2.2.x-dev"
+        "sonata-project/admin-bundle": "2.3.x-dev"
     },
     "autoload": {
         "psr-0": { "SIP\\TranslationBundle": "" }
