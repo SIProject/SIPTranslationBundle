@@ -47,9 +47,9 @@ class TranslationType extends AbstractType
         $transformer = new FieldToTranslationTransformer($this->em, $this->translationListener, $sonataFieldDescription);
         $builder->addModelTransformer($transformer);
 
-        $builder->add($this->translationListener->getDefaultLocale(), $options['type'], array('required' => $options['required']));
+        $builder->add($this->translationListener->getDefaultLocale(), $options['type'], array_merge($options['field_options'], array('required' => $options['required'])));
         foreach ($this->translationListener->getLocales() as $allowLang) {
-            $builder->add($allowLang, $options['type'], array('required' => false));
+            $builder->add($allowLang, $options['type'], array_merge($options['field_options'], array('required' => false)));
         }
 
     }
@@ -59,7 +59,11 @@ class TranslationType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $options = array('compound' => true, 'type' => null);
+        $options = array(
+            'compound'      => true,
+            'type'          => null,
+            'field_options' => array()
+        );
 
         $resolver->setDefaults($options);
     }
