@@ -5,7 +5,7 @@
 
             <ul class="nav nav-tabs">
                 {% for key, child in form %}
-                    <li {% if loop.first %}class="active"{% endif %}><a href="#tabs-{{ id }}-{{ key }}" data-toggle="tab">{{ key }}</a></li>
+                    <li {% if loop.first %}class="active"{% endif %}><a class="tab-selector" href="#tabs-{{ id }}-{{ key }}" data-toggle="tab">{{ key }}</a></li>
                 {% endfor %}
             </ul>
             <div class="active tab-content">
