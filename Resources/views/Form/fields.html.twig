@@ -8,7 +8,7 @@
                     <li {% if loop.first %}class="active"{% endif %}><a href="#tabs-{{ id }}-{{ key }}" data-toggle="tab">{{ key }}</a></li>
                 {% endfor %}
             </ul>
-            <div class="tab-content">
+            <div class="active tab-content">
                 {% for key, child in form %}
                     {{ block('translation_widget_row') }}
                 {% endfor %}
