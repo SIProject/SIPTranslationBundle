@@ -5,6 +5,8 @@
 namespace SIP\TranslationBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -41,10 +43,16 @@ class TranslationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        /** @var \Sonata\DoctrineORMAdminBundle\Admin\FieldDescription $sonataFieldDescription */
-        $sonataFieldDescription = $options['sonata_field_description'];
+        if (isset($options['sonata_field_description'])) {
+            /** @var \Sonata\DoctrineORMAdminBundle\Admin\FieldDescription $sonataFieldDescription */
+            $sonataFieldDescription = $options['sonata_field_description'];
+            if (!$options['parent_data'])
+                $options['parent_data'] = $sonataFieldDescription->getAdmin()->getSubject();
+            if (!$options['field_name'])
+                $options['field_name'] = $sonataFieldDescription->getFieldName();
+        }
 
-        $transformer = new FieldToTranslationTransformer($this->em, $this->translationListener, $sonataFieldDescription);
+        $transformer = new FieldToTranslationTransformer($this->em, $this->translationListener, $options['parent_data'], $options['field_name']);
         $builder->addModelTransformer($transformer);
 
         $builder->add($this->translationListener->getDefaultLocale(), $options['type'], array_merge($options['field_options'], array('required' => $options['required'])));
@@ -62,7 +70,9 @@ class TranslationType extends AbstractType
         $options = array(
             'compound'      => true,
             'type'          => null,
-            'field_options' => array()
+            'field_options' => array(),
+            'parent_data'   => null,
+            'field_name'    => null
         );
 
         $resolver->setDefaults($options);

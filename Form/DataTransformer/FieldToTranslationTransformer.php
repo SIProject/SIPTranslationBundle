@@ -21,10 +21,9 @@ class FieldToTranslationTransformer implements DataTransformerInterface
      */
     protected $em;
 
-    /**
-     * @var \Sonata\DoctrineORMAdminBundle\Admin\FieldDescription
-     */
-    protected $sonataFieldDescription;
+    protected $data;
+
+    protected $fieldName;
 
     /**
      * @var \SIP\TranslationBundle\EventListener\TranslationListener
@@ -33,15 +32,18 @@ class FieldToTranslationTransformer implements DataTransformerInterface
 
     /**
      * @param \Doctrine\ORM\EntityManager $em
-     * @param $dafaultLang
-     * @param $allowLangs
-     * @param \Sonata\DoctrineORMAdminBundle\Admin\FieldDescription $sonataFieldDescription
+     * @param \SIP\TranslationBundle\EventListener\TranslationListener $translationListener
+     * @param $data
+     * @param $fieldName
+     * @internal param $dafaultLang
+     * @internal param $allowLangs
      */
-    public function __construct(EntityManager $em, TranslationListener $translationListener, FieldDescription $sonataFieldDescription)
+    public function __construct(EntityManager $em, TranslationListener $translationListener, $data, $fieldName)
     {
         $this->translationListener = $translationListener;
-        $this->em = $em;
-        $this->sonataFieldDescription = $sonataFieldDescription;
+        $this->em                  = $em;
+        $this->data                = $data;
+        $this->fieldName           = $fieldName;
     }
 
     /**
@@ -56,12 +58,12 @@ class FieldToTranslationTransformer implements DataTransformerInterface
             return $defaultLangValue;
         }
 
-        $subject = $this->sonataFieldDescription->getAdmin()->getSubject();
+        $subject = $this->data;
         if ($subject && $subject->getId()) {
             $classMetaData = $this->em->getClassMetadata(get_class($subject));
 
             $tableName = $classMetaData->getTableName();
-            $fieldName = $this->sonataFieldDescription->getFieldName();
+            $fieldName = $this->fieldName;
 
             if (!$this->checkColumn($tableName, $fieldName)) {
                 throw new \LogicException('Field is not translatable!');
@@ -97,9 +99,9 @@ class FieldToTranslationTransformer implements DataTransformerInterface
         $defaultLang = $translationValue[$this->translationListener->getDefaultLocale()];
         unset($translationValue[$this->translationListener->getDefaultLocale()]);
 
-        if ($subject = $this->sonataFieldDescription->getAdmin()->getSubject()) {
+        if ($subject = $this->data) {
             $classMetaData = $this->em->getClassMetadata(get_class($subject));
-            $columnName = $classMetaData->getColumnName($this->sonataFieldDescription->getFieldName());
+            $columnName = $classMetaData->getColumnName($this->fieldName);
             $this->translationListener->addTranslationValue(get_class($subject), $columnName, $translationValue);
 
             if ($subject->getId()) {
