@@ -92,6 +92,7 @@ class TranslationListener
                         $options = $column;
                         unset($options['columnName']);
                         unset($options['type']);
+                        $options['notnull'] = false;
                         $table->addColumn("{$column['columnName']}_{$locale}", $column['type'], $options);
                     }
                 }
