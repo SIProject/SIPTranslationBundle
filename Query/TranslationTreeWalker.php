@@ -118,7 +118,7 @@ class TranslationTreeWalker extends SqlWalker
         if ($decorateFields = $this->getTranslationListener($query)->getDecoratedTable($classMetaData->table['name'])) {
             foreach ($classMetaData->fieldMappings as $key => $filed) {
                 foreach ($decorateFields as $decorateField) {
-                    if ($filed['fieldName'] == $decorateField['fieldName']) {
+                    if ($filed['fieldName'] == $decorateField['fieldName'] && !preg_match("/_{$locale}$/", $filed['columnName'])) {
                         $classMetaData->fieldMappings[$key]['columnName'] = "{$filed['columnName']}_{$locale}";
                     }
                 }
